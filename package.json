@@ -1,11 +1,7 @@
 {
   "name": "surgejs",
-  "version": "0.1.2",
+  "version": "0.1.5",
   "description": "Synchronize reactive variables with backends written in other languages. Requires the companion Surge.jl package for the backend.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \\\"Error: no test specified\\\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/sciflydev/Surge.js"
@@ -19,5 +15,23 @@
   "bugs": {
     "url": "https://github.com/sciflydev/Surge.js/issues"
   },
-  "homepage": "https://github.com/sciflydev/Surge.js#readme"
+  "homepage": "https://github.com/sciflydev/Surge.js#readme",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "tsup": "^8.0.0",
+    "vue": "^3.0.0"
+  }
 }

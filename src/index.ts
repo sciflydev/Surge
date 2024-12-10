@@ -1,14 +1,11 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 export interface SurgeOptions {
-  devPort?: string
-  prodPort?: string
+  port?: string
 }
 
 export function useSurge(signalIds: string[], options: SurgeOptions = {}) {
-  const DEV_PORT = options.devPort || '8080'
-  const PROD_PORT = options.prodPort || '443'
-  
+  const port = options.port || '8080'
   const signalRefs: Record<string, ReturnType<typeof ref>> = {}
   const isConnected = ref(false)
   const isLoading = ref(true)
@@ -40,7 +37,6 @@ export function useSurge(signalIds: string[], options: SurgeOptions = {}) {
 
   const connect = () => {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-    const port = import.meta.env.VITE_ENV === 'production' ? PROD_PORT : DEV_PORT
     ws = new WebSocket(`${protocol}//${window.location.hostname}:${port}`)
 
     ws.onopen = () => {
